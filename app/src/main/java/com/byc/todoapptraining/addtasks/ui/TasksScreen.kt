@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -149,7 +150,11 @@ private fun FabDialog(modifier: Modifier, tasksViewModel: TasksViewModel) {
             tasksViewModel.onShowDialogClick()
         }, modifier = modifier
     ) {
-        Icon(imageVector = Icons.Filled.Add, contentDescription = "Add task")
+        Icon(
+            imageVector = Icons.Filled.Add,
+            contentDescription = "Add task",
+            modifier = Modifier.testTag("Add task icon")
+        )
     }
 }
 
@@ -169,13 +174,16 @@ fun AddTaskDialog(
                     .fillMaxWidth()
                     .background(Color.White)
                     .padding(16.dp)
+                    .testTag("Dialog column")
             ) {
                 Text(
                     text = "Agrega una tarea",
                     fontSize = 18.sp,
-                    modifier = Modifier.align(
-                        Alignment.CenterHorizontally
-                    ),
+                    modifier = Modifier
+                        .align(
+                            Alignment.CenterHorizontally
+                        )
+                        .testTag("Add task label"),
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.size(16.dp))
@@ -190,7 +198,11 @@ fun AddTaskDialog(
                     onTaskAdded(myTask)
                     myTask = ""
                 }, modifier = Modifier.fillMaxWidth()) {
-                    Text(text = "Agregar tarea")
+                    Text(
+                        text = "Agregar tarea",
+                        modifier = Modifier
+                            .testTag("Add task placeholder")
+                    )
                 }
             }
         }
